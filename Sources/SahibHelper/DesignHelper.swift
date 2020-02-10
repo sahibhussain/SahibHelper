@@ -1,6 +1,6 @@
 //
 //  Design Helper.swift
-//  Exam Kwiz
+//  Sahib Helper
 //
 //  Created by sahib hussain on 05/02/20.
 //  Copyright © 2020 sahib hussain. All rights reserved.
@@ -11,6 +11,7 @@ import UIKit
 class DesignHelper {
     
     static let shared = DesignHelper()
+    typealias completion = (_ success: Bool) -> Void
     private init () {}
     
     func dropShadow(view : UIView, radius : CGFloat) {
@@ -79,6 +80,24 @@ class DesignHelper {
             statView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: 20)
             statView.backgroundColor = ColorHelper.shared.hexStringToColor(hexStr: color, alpha: 1)
             return statView
+        }
+        
+    }
+    
+    func toast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
+        
+        var style = ToastStyle()
+        style.messageAlignment = .center
+        
+        view.makeToast(message, duration: duration, position: position, style: style)
+    }
+    
+    func completionToast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping completion) {
+        var style = ToastStyle()
+        style.messageAlignment = .center
+        
+        view.makeToast(message, duration: duration, position: position, title: nil, image: nil, style: style) { (succ) in
+            comp(succ)
         }
         
     }

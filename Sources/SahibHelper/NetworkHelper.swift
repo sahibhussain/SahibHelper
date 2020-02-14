@@ -11,8 +11,6 @@ import Alamofire
 
 class Networking {
     
-//    #warning("Change url to production")
-//    let baseUrl = "http://pcc123.com/API/SMSDEMO1/"  // Development URL
     var baseUrl = "http://pcc123.com/API/SMSLiveDemo1/"  // Production URL
     
     typealias completionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void

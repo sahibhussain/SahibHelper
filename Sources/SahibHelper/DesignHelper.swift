@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DesignHelper {
+public class DesignHelper {
     
     static let shared = DesignHelper()
     typealias completion = (_ success: Bool) -> Void

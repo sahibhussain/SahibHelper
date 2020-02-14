@@ -10,7 +10,7 @@ import UIKit
 
 public class DesignHelper {
     
-    static let shared = DesignHelper()
+    public static let shared = DesignHelper()
     typealias completion = (_ success: Bool) -> Void
     private init () {}
     

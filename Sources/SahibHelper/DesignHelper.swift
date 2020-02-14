@@ -12,7 +12,6 @@ public class DesignHelper {
     
     public static let shared = DesignHelper()
     public typealias completion = (_ success: Bool) -> Void
-    public var loaderView: UIView?
     
     private init () {}
     
@@ -103,34 +102,6 @@ public class DesignHelper {
             comp(succ)
         }
         
-    }
-    
-    public func createLoader() -> UIView {
-        let view = UIView(frame: .init(x: 0, y: 0, width: 100, height: 100))
-        view.backgroundColor = .white
-        dropShadow(view: view, radius: 6)
-        
-        let activityIndicator = UIActivityIndicatorView(style: .gray)
-        activityIndicator.color = .black
-        activityIndicator.startAnimating()
-        view.center = activityIndicator.center
-        view.addSubview(activityIndicator)
-        
-        return view
-    }
-    
-    public func showLoader(_ view: UIView) {
-        loaderView = createLoader()
-        if let vw = loaderView {
-            view.addSubview(vw)
-            view.center = vw.center
-            view.bringSubviewToFront(vw)
-        }
-    }
-    
-    public func dismissLoader() {
-        loaderView?.removeFromSuperview()
-        loaderView = nil
     }
     
 }

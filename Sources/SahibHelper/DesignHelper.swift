@@ -11,7 +11,7 @@ import UIKit
 public class DesignHelper {
     
     public static let shared = DesignHelper()
-    typealias completion = (_ success: Bool) -> Void
+    public typealias completion = (_ success: Bool) -> Void
     private init () {}
     
     public func dropShadow(view : UIView, radius : CGFloat) {
@@ -106,7 +106,7 @@ public class DesignHelper {
 
 public class ColorHelper {
     
-    enum colorCode: String {
+    public enum colorCode: String {
         case primary = "D32F2F"
         case buttonBlue = "007AFF"
         case darkView = "252529"

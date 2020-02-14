@@ -14,7 +14,7 @@ extension UIAlertController {
     }
 }
 
-final class PickerViewViewController: UIViewController {
+public class PickerViewViewController: UIViewController {
     
     public typealias Values = [[String]]
     public typealias Index = (column: Int, row: Int)

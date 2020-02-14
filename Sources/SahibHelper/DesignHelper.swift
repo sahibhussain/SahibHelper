@@ -14,7 +14,7 @@ public class DesignHelper {
     typealias completion = (_ success: Bool) -> Void
     private init () {}
     
-    func dropShadow(view : UIView, radius : CGFloat) {
+    public func dropShadow(view : UIView, radius : CGFloat) {
         view.layer.masksToBounds = false
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.16
@@ -22,12 +22,12 @@ public class DesignHelper {
         view.layer.shadowRadius = radius
     }
     
-    func setButtonFontAwesome(btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
+    public func setButtonFontAwesome(btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: size, style: style)
         btn.setTitle(String.fontAwesomeIcon(name: icon), for: .normal)
     }
     
-    func setFontAwesomeInFrontAttributedButton(_ btn: UIButton, string: String, iconColor: UIColor, textColor: UIColor, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
+    public func setFontAwesomeInFrontAttributedButton(_ btn: UIButton, string: String, iconColor: UIColor, textColor: UIColor, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
         let attr = [NSAttributedString.Key.foregroundColor : textColor]
         
         let image1Attachment = NSTextAttachment()
@@ -41,12 +41,12 @@ public class DesignHelper {
         btn.setAttributedTitle(passAttStr, for: .normal)
     }
     
-    func createImagefromFontAwesome(size: CGSize, style: FontAwesomeStyle, icon: FontAwesome, color: UIColor) -> UIImage {
+    public func createImagefromFontAwesome(size: CGSize, style: FontAwesomeStyle, icon: FontAwesome, color: UIColor) -> UIImage {
         let img = UIImage.fontAwesomeIcon(name: icon, style: style, textColor: color, size: size)
         return img
     }
     
-    func radioButton(_ button: UIButton, checked: Bool, label: String) {
+    public func radioButton(_ button: UIButton, checked: Bool, label: String) {
         let color = UIColor.black
         let attr = [NSAttributedString.Key.foregroundColor : color]
         
@@ -65,11 +65,11 @@ public class DesignHelper {
         button.setAttributedTitle(passAttStr, for: .normal)
     }
     
-    func checkboxButton(_ button: UIButton, checked: Bool, label: String) {
+    public func checkboxButton(_ button: UIButton, checked: Bool, label: String) {
         
     }
     
-    func statusView(viewWidth: CGFloat, color: String) -> UIView {
+    public func statusView(viewWidth: CGFloat, color: String) -> UIView {
         let statView = UIView()
         
         if UIDevice.current.hasNotch {
@@ -84,7 +84,7 @@ public class DesignHelper {
         
     }
     
-    func toast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
+    public func toast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
         
         var style = ToastStyle()
         style.messageAlignment = .center
@@ -92,7 +92,7 @@ public class DesignHelper {
         view.makeToast(message, duration: duration, position: position, style: style)
     }
     
-    func completionToast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping completion) {
+    public func completionToast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping completion) {
         var style = ToastStyle()
         style.messageAlignment = .center
         
@@ -104,7 +104,7 @@ public class DesignHelper {
     
 }
 
-class ColorHelper {
+public class ColorHelper {
     
     enum colorCode: String {
         case primary = "D32F2F"
@@ -115,10 +115,10 @@ class ColorHelper {
         case lightText = "FFFFFF"
     }
     
-    static let shared = ColorHelper()
+    public static let shared = ColorHelper()
     private init () {}
     
-    func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor{
+    public func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor{
         var cString:String = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         if (cString.hasPrefix("#")) {
@@ -140,7 +140,7 @@ class ColorHelper {
         )
     }
     
-    func hexStringToColor(hexCode: colorCode, alpha: CGFloat) -> UIColor{
+    public func hexStringToColor(hexCode: colorCode, alpha: CGFloat) -> UIColor{
         var cString:String = hexCode.rawValue.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         if (cString.hasPrefix("#")) {

@@ -26,7 +26,7 @@ import UIKit
 
     @IBInspectable public var isFontAwesomeCSSCode: Bool = true
     @IBInspectable public var styleName: String = "Brands"
-    @IBInspectable public var size: CGFloat = 22.0
+    @IBInspectable public var sizeText: CGFloat = 22.0
 
     public override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,7 +65,7 @@ extension FontAwesomeSegmentedControl: FontAwesomeTextRepresentable {
     }
 
     var textSize: CGFloat {
-        return size
+        return sizeText
     }
 
     static func supportedStates() -> [UIControl.State] {

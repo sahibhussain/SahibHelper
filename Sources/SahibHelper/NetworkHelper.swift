@@ -9,26 +9,26 @@
 import UIKit
 import Alamofire
 
-class Networking {
+public class Networking {
     
-    var baseUrl = "http://pcc123.com/API/SMSLiveDemo1/"  // Production URL
+    public static var baseUrl = "http://pcc123.com/API/SMSLiveDemo1/"  // Production URL
     
-    typealias completionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
+    public typealias completionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
     var headers: [String: String] = [:]
     
     
-    static let shared = Networking()
+    public static let shared = Networking()
     
     private init () {
         headers = ["Content-Type": "application/json"]
     }
     
-    func sharedBaseUrl(_ urlStr: String) {
-        baseUrl = urlStr
+    public func sharedBaseUrl(_ urlStr: String) {
+        Networking.baseUrl = urlStr
     }
     
-    func sendPostRequest(urlExt: String, param: [String:Any], comp: @escaping completionHandler) {
-        let urlString = "\(baseUrl)\(urlExt)"
+    public func sendPostRequest(urlExt: String, param: [String:Any], comp: @escaping completionHandler) {
+        let urlString = "\(Networking.baseUrl)\(urlExt)"
         
         AF.request(urlString,method: .post, parameters: param, encoding: JSONEncoding.default, headers: HTTPHeaders(headers))
             .responseJSON { response in
@@ -42,9 +42,9 @@ class Networking {
         }
     }
     
-    func sendGetRequest(urlExt: String, param: String, comp: @escaping completionHandler) {
+    public func sendGetRequest(urlExt: String, param: String, comp: @escaping completionHandler) {
         
-        var urlString = "\(baseUrl)\(urlExt)?\(param)"
+        var urlString = "\(Networking.baseUrl)\(urlExt)?\(param)"
         urlString = urlString.replacingOccurrences(of: " ", with: "%20")
         
         AF.request(urlString).responseJSON { (response) in
@@ -58,7 +58,7 @@ class Networking {
         
     }
     
-    func jsonToString(json: [String:Any]) -> String{
+    public func jsonToString(json: [String:Any]) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
             let convertedString = String(data: data1, encoding: .utf8)
@@ -70,7 +70,7 @@ class Networking {
         return "nil"
     }
     
-    func changeDateFormat(inputString: String, inputFormat: String) -> String {
+    public func changeDateFormat(inputString: String, inputFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
         let date = dateFormatter.date(from: inputString)!
@@ -80,7 +80,7 @@ class Networking {
         return dtString
     }
     
-    func changeDateFormatWithTime(inputString: String, inputFormat: String) -> String {
+    public func changeDateFormatWithTime(inputString: String, inputFormat: String) -> String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
@@ -92,7 +92,7 @@ class Networking {
         
     }
     
-    func getLastDateOfMonth(month: String, year: String) -> String {
+    public func getLastDateOfMonth(month: String, year: String) -> String {
         let monthInt = Int(month)!
         let yearInt = Int(year)!
         
@@ -119,7 +119,7 @@ class Networking {
         }
     }
     
-    func alert(message:String, viewController: UIViewController) {
+    public func alert(message:String, viewController: UIViewController) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let act = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(act)
@@ -141,7 +141,7 @@ class Networking {
     }
     */
     
-    func matches(_ string: String, regex: String) -> Bool {
+    public func matches(_ string: String, regex: String) -> Bool {
         return string.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
     

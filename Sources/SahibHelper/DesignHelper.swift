@@ -12,6 +12,7 @@ public class DesignHelper {
     
     public static let shared = DesignHelper()
     public typealias completion = (_ success: Bool) -> Void
+    public let color = ColorHelper.shared
     
     private init () {}
     

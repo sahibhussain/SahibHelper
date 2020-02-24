@@ -49,15 +49,14 @@ public class DesignHelper {
         return img
     }
     
-    public func radioButton(_ button: UIButton, checked: Bool, label: String) {
-        let color = UIColor.black
+    public func radioButton(_ button: UIButton, checked: Bool, label: String, color: UIColor = .black) {
         let attr = [NSAttributedString.Key.foregroundColor : color]
         
         let image1Attachment = NSTextAttachment()
         if checked {
-            image1Attachment.image = UIImage(named: "radio-on")
+            image1Attachment.image = UIImage.fontAwesomeIcon(name: .dotCircle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
         }else {
-            image1Attachment.image = UIImage(named: "radio-off")
+            image1Attachment.image = UIImage.fontAwesomeIcon(name: .circle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
         }
         image1Attachment.bounds = CGRect(x: 0, y: 0, width: 13, height: 13)
         let image1String = NSAttributedString(attachment: image1Attachment)

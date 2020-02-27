@@ -168,7 +168,7 @@ public class ColorHelper {
 
 extension UIImage {
     
-    func resizeWithPercent(percentage: CGFloat) -> UIImage? {
+    public func resizeWithPercent(percentage: CGFloat) -> UIImage? {
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: size.width * percentage, height: size.height * percentage)))
         imageView.contentMode = .scaleAspectFit
         imageView.image = self
@@ -180,7 +180,7 @@ extension UIImage {
         return result
     }
     
-    func resizeWithWidth(width: CGFloat) -> UIImage? {
+    public func resizeWithWidth(width: CGFloat) -> UIImage? {
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
         imageView.contentMode = .scaleAspectFit
         imageView.image = self
@@ -196,15 +196,15 @@ extension UIImage {
 
 extension Bundle {
     
-    var releaseVersionNumber: String? {
+    public var releaseVersionNumber: String? {
         return infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
-    var buildVersionNumber: String? {
+    public var buildVersionNumber: String? {
         return infoDictionary?["CFBundleVersion"] as? String
     }
     
-    var bundleIdentifier: String? {
+    public var bundleIdentifier: String? {
         return infoDictionary?["CFBundleIdentifier"] as? String
     }
     
@@ -212,7 +212,7 @@ extension Bundle {
 
 extension UIDevice {
     
-    var hasNotch: Bool {
+    public var hasNotch: Bool {
         if #available(iOS 11.0, *) {
             let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
              return bottom > 0

@@ -14,7 +14,7 @@ public class Networking {
     public static var baseUrl = "http://pcc123.com/API/SMSLiveDemo1/"  // Production URL
     
     public typealias completionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
-    var headers: [String: String] = [:]
+    public var headers: [String: String] = [:]
     
     
     public static let shared = Networking()

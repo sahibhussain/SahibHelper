@@ -104,6 +104,13 @@ public class DesignHelper {
         
     }
     
+    public func openImageViewer(_ viewController: UIViewController, urls: [String], presentationStyle: UIModalPresentationStyle) {
+        let vc = ImageViewer(nibName: "ImageViewer", bundle: nil)
+        vc.imageUrls = urls
+        vc.modalPresentationStyle = presentationStyle
+        viewController.present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 public class ColorHelper {

@@ -16,7 +16,6 @@ public class ImageViewer: UIViewController {
     @IBOutlet public var closeButton: UIButton!
     
     public var imageUrls: [String] = []
-    
     private let designHelper = DesignHelper.shared
     
     override public func viewDidLoad() {
@@ -66,7 +65,7 @@ extension ImageViewer: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let items = collectionView.visibleCells
         let item = items.first
         
-        print(item)
+        print(item ?? "nil")
         
     }
     

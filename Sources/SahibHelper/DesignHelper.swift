@@ -173,6 +173,26 @@ public class ColorHelper {
     
 }
 
+extension UITextField {
+    
+    public func leftPadding(_ padding: CGFloat) {
+        let vw = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
+        vw.backgroundColor = .white
+        
+        self.leftView = vw
+        self.leftViewMode = .always
+    }
+    
+    public func rightPadding(_ padding: CGFloat) {
+        let vw = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
+        vw.backgroundColor = .white
+        
+        self.rightView = vw
+        self.rightViewMode = .always
+    }
+    
+}
+
 extension UIImage {
     
     public func resizeWithPercent(percentage: CGFloat) -> UIImage? {

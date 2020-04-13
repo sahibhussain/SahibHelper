@@ -6,7 +6,6 @@
 //  Copyright © 2020 sahib hussain. All rights reserved.
 //
 
-#if !os(macOS)
 import UIKit
 
 public class DesignHelper {
@@ -245,4 +244,3 @@ extension UIDevice {
     }
     
 }
-#endif

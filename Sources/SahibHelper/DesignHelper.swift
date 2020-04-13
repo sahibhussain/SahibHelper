@@ -6,25 +6,30 @@
 //  Copyright © 2020 sahib hussain. All rights reserved.
 //
 
+#if !os(macOS)
 import UIKit
 
 public class DesignHelper {
     
     public static let shared = DesignHelper()
     public typealias completion = (_ success: Bool) -> Void
-    public let color = ColorHelper.shared
     
     private init () {}
     
-    
-    public func dropShadow(view : UIView, radius : CGFloat) {
+//    MARK: - shadow related
+    public func dropShadow(view: UIView, radius: CGFloat = 6, opacity: Float = 0.16, color: UIColor = .black, offset: CGSize = .init(width: 0, height: 3)) {
         view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.16
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        view.layer.shadowColor = color.cgColor
+        view.layer.shadowOpacity = opacity
+        view.layer.shadowOffset = offset
         view.layer.shadowRadius = radius
     }
     
+    
+    
+    
+    
+//    MARK: - font awesome related
     public func setButtonFontAwesome(btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: size, style: style)
         btn.setTitle(String.fontAwesomeIcon(name: icon), for: .normal)
@@ -48,6 +53,11 @@ public class DesignHelper {
         let img = UIImage.fontAwesomeIcon(name: icon, style: style, textColor: color, size: size)
         return img
     }
+    
+    
+    
+    
+    
     
     public func radioButton(_ button: UIButton, checked: Bool, label: String, color: UIColor = .black) {
         let attr = [NSAttributedString.Key.foregroundColor : color]
@@ -86,6 +96,10 @@ public class DesignHelper {
         
     }
     
+    
+    
+    
+//    MARK: - toast related
     public func toast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
         
         var style = ToastStyle()
@@ -104,6 +118,12 @@ public class DesignHelper {
         
     }
     
+    
+    
+    
+    
+    
+//    MARK: - imageviewer related
     public func openImageViewer(_ viewController: UIViewController, urls: [String], presentationStyle: UIModalPresentationStyle) {
         let vc = ImageViewer(nibName: "ImageViewer", bundle: nil)
         vc.imageUrls = urls
@@ -111,46 +131,12 @@ public class DesignHelper {
         viewController.present(vc, animated: true, completion: nil)
     }
     
-}
-
-public class ColorHelper {
     
-    public enum colorCode: String {
-        case primary = "D32F2F"
-        case buttonBlue = "007AFF"
-        case darkView = "252529"
-        case lightView = "F5F5F5"
-        case darkText = "000000"
-        case lightText = "FFFFFF"
-    }
     
-    public static let shared = ColorHelper()
-    private init () {}
     
+//    MARK: - color related
     public func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor{
         var cString:String = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if ((cString.count) != 6) {
-            return UIColor.gray
-        }
-        
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: alpha
-        )
-    }
-    
-    public func hexStringToColor(hexCode: colorCode, alpha: CGFloat) -> UIColor{
-        var cString:String = hexCode.rawValue.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)
@@ -187,7 +173,7 @@ extension UITextField {
     
     public func leftPadding(_ padding: CGFloat) {
         let vw = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
-        vw.backgroundColor = .white
+        vw.backgroundColor = self.backgroundColor
         
         self.leftView = vw
         self.leftViewMode = .always
@@ -195,7 +181,7 @@ extension UITextField {
     
     public func rightPadding(_ padding: CGFloat) {
         let vw = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
-        vw.backgroundColor = .white
+        vw.backgroundColor = self.backgroundColor
         
         self.rightView = vw
         self.rightViewMode = .always
@@ -259,3 +245,4 @@ extension UIDevice {
     }
     
 }
+#endif

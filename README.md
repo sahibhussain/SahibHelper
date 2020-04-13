@@ -14,7 +14,7 @@
 
 # ReadMe.md
 
-![](https://img.shields.io/github/v/tag/sahibhussain/SahibHelper?style=for-the-badge)
+![](https://img.shields.io/github/v/release/sahibhussain/SahibHelper?style=for-the-badge)
 
 #### Installation
 

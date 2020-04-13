@@ -23,12 +23,15 @@ public class Networking {
         headers = ["Content-Type": "application/json"]
     }
     
+    
+//    MARK: - networkd related
     public func sharedBaseUrl(_ urlStr: String) {
         Networking.baseUrl = urlStr
     }
     
-    public func sendPostRequest(urlExt: String, param: [String:Any], comp: @escaping completionHandler) {
-        let urlString = "\(Networking.baseUrl)\(urlExt)"
+    public func sendPostRequest(_ urlExt: String, param: [String: Any], comp: @escaping completionHandler) {
+        
+        let urlString = Networking.baseUrl + urlExt
         
         AF.request(urlString,method: .post, parameters: param, encoding: JSONEncoding.default, headers: HTTPHeaders(headers))
             .responseJSON { response in
@@ -42,10 +45,38 @@ public class Networking {
         }
     }
     
+    public func sendPostRequest(_ urlExt: String, param: [String: String], withFile: [String: URL], comp: @escaping completionHandler) {
+        
+        let urlString = Networking.baseUrl + urlExt
+        
+        AF.upload(multipartFormData: { (formData) in
+            
+            for (key, value) in withFile {
+                formData.append(value, withName: key)
+            }
+            
+            for (key, value) in param {
+                let data = value.data(using: .utf8)!
+                formData.append(data, withName: key)
+            }
+            
+        }, to: urlString).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(let value):
+                comp(value as? [String:Any], nil)
+            case .failure(let error):
+                comp(nil, error)
+            }
+            
+        }
+        
+    }
+    
     public func sendGetRequest(urlExt: String, param: String, comp: @escaping completionHandler) {
         
-        var urlString = "\(Networking.baseUrl)\(urlExt)?\(param)"
-        urlString = urlString.replacingOccurrences(of: " ", with: "%20")
+        var urlString = Networking.baseUrl + urlExt + "?" + param
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         
         AF.request(urlString).responseJSON { (response) in
             switch response.result {
@@ -58,7 +89,25 @@ public class Networking {
         
     }
     
-    public func jsonToString(json: [String:Any]) -> String{
+    public func sendGetRequest(completeUrl: String, param: String, comp: @escaping completionHandler) {
+        
+        var urlString = completeUrl + "?" + param
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
+        
+        AF.request(urlString).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                comp(value as? [String:Any], nil)
+            case .failure(let error):
+                comp(nil, error)
+            }
+        }
+        
+    }
+    
+    
+//    MARK: - json related
+    public func jsonToString(_ json: [String:Any]) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
             let convertedString = String(data: data1, encoding: .utf8)
@@ -70,7 +119,9 @@ public class Networking {
         return "nil"
     }
     
-    public func changeDateFormat(inputString: String, inputFormat: String) -> String {
+    
+//    MARK: - date related
+    public func changeDateFormat(_ inputString: String, inputFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
         let date = dateFormatter.date(from: inputString)!
@@ -80,7 +131,7 @@ public class Networking {
         return dtString
     }
     
-    public func changeDateFormatWithTime(inputString: String, inputFormat: String) -> String {
+    public func changeDateFormatWithTime(_ inputString: String, inputFormat: String) -> String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
@@ -119,28 +170,20 @@ public class Networking {
         }
     }
     
-    public func alert(message:String, viewController: UIViewController) {
+    
+    
+    
+//    MARK: - alert
+    public func alert(_ message:String, viewController: UIViewController) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let act = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(act)
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    /*
-    func logout(message: String, viewController: UIViewController) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let act = UIAlertAction(title: "OK", style: .cancel) { (action) in
-            let vc = viewController.storyboard?.instantiateViewController(withIdentifier: "Login")
-            vc!.modalPresentationStyle = .fullScreen
-            viewController.present(vc!, animated: true) {
-                UserSettings.delete(file: .user)
-            }
-        }
-        alert.addAction(act)
-        viewController.present(alert, animated: true, completion: nil)
-    }
-    */
     
+    
+//    MARK: - regex related
     public func matches(_ string: String, regex: String) -> Bool {
         return string.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }

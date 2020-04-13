@@ -86,11 +86,11 @@ public class DesignHelper {
         
         if UIDevice.current.hasNotch {
             statView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: 44)
-            statView.backgroundColor = ColorHelper.shared.hexStringToColor(hexStr: color, alpha: 1)
+            statView.backgroundColor = hexStringToColor(hexStr: color, alpha: 1)
             return statView
         }else {
             statView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: 20)
-            statView.backgroundColor = ColorHelper.shared.hexStringToColor(hexStr: color, alpha: 1)
+            statView.backgroundColor = hexStringToColor(hexStr: color, alpha: 1)
             return statView
         }
         

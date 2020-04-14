@@ -13,7 +13,7 @@ public class Networking {
     
     public static var baseUrl = "http://pcc123.com/API/SMSLiveDemo1/"  // Production URL
     
-    public typealias completionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
+    public typealias CompletionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
     public var headers: [String: String] = [:]
     
     
@@ -24,12 +24,12 @@ public class Networking {
     }
     
     
-//    MARK: - networkd related
+//    MARK: -networkd related
     public func sharedBaseUrl(_ urlStr: String) {
         Networking.baseUrl = urlStr
     }
     
-    public func sendPostRequest(_ urlExt: String, param: [String: Any], comp: @escaping completionHandler) {
+    public func sendPostRequest(_ urlExt: String, param: [String: Any], comp: @escaping CompletionHandler) {
         
         let urlString = Networking.baseUrl + urlExt
         
@@ -45,7 +45,7 @@ public class Networking {
         }
     }
     
-    public func sendPostRequest(_ urlExt: String, param: [String: String], withFile: [String: URL], comp: @escaping completionHandler) {
+    public func sendPostRequest(_ urlExt: String, param: [String: String], withFile: [String: URL], comp: @escaping CompletionHandler) {
         
         let urlString = Networking.baseUrl + urlExt
         
@@ -73,7 +73,7 @@ public class Networking {
         
     }
     
-    public func sendGetRequest(urlExt: String, param: String, comp: @escaping completionHandler) {
+    public func sendGetRequest(urlExt: String, param: String, comp: @escaping CompletionHandler) {
         
         var urlString = Networking.baseUrl + urlExt + "?" + param
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
@@ -89,7 +89,7 @@ public class Networking {
         
     }
     
-    public func sendGetRequest(completeUrl: String, param: String, comp: @escaping completionHandler) {
+    public func sendGetRequest(completeUrl: String, param: String, comp: @escaping CompletionHandler) {
         
         var urlString = completeUrl + "?" + param
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
@@ -106,7 +106,7 @@ public class Networking {
     }
     
     
-//    MARK: - json related
+//    MARK: -json related
     public func jsonToString(_ json: [String:Any]) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -120,7 +120,7 @@ public class Networking {
     }
     
     
-//    MARK: - date related
+//    MARK: -date related
     public func changeDateFormat(_ inputString: String, inputFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
@@ -173,7 +173,7 @@ public class Networking {
     
     
     
-//    MARK: - alert
+//    MARK: -alert
     public func alert(_ message:String, viewController: UIViewController) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let act = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -183,7 +183,7 @@ public class Networking {
     
     
     
-//    MARK: - regex related
+//    MARK: -regex related
     public func matches(_ string: String, regex: String) -> Bool {
         return string.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }

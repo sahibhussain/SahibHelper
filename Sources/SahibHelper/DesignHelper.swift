@@ -11,11 +11,11 @@ import UIKit
 public class DesignHelper {
     
     public static let shared = DesignHelper()
-    public typealias completion = (_ success: Bool) -> Void
+    public typealias Completion = (_ success: Bool) -> Void
     
     private init () {}
     
-//    MARK: - shadow related
+//    MARK: -shadow related
     public func dropShadow(view: UIView, radius: CGFloat = 6, opacity: Float = 0.16, color: UIColor = .black, offset: CGSize = .init(width: 0, height: 3)) {
         view.layer.masksToBounds = false
         view.layer.shadowColor = color.cgColor
@@ -28,17 +28,24 @@ public class DesignHelper {
     
     
     
-//    MARK: - font awesome related
+//    MARK: -font awesome related
     public func setButtonFontAwesome(btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: size, style: style)
         btn.setTitle(String.fontAwesomeIcon(name: icon), for: .normal)
     }
     
-    public func setFontAwesomeInFrontAttributedButton(_ btn: UIButton, string: String, iconColor: UIColor, textColor: UIColor, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
+    public func setFontAwesomeInFrontAttributedButton(_ btn: UIButton,
+                                                      string: String,
+                                                      iconColor: UIColor = .black,
+                                                      textColor: UIColor = .black,
+                                                      size: CGFloat,
+                                                      style: FontAwesomeStyle,
+                                                      icon: FontAwesome) {
         let attr = [NSAttributedString.Key.foregroundColor : textColor]
         
         let image1Attachment = NSTextAttachment()
-        image1Attachment.image = UIImage.fontAwesomeIcon(name: icon, style: style, textColor: iconColor, size: .init(width: size, height: size))
+        let image = UIImage.fontAwesomeIcon(name: icon, style: style, textColor: iconColor, size: .init(width: size, height: size))
+        image1Attachment.image = image
         image1Attachment.bounds = CGRect(x: 0, y: 0, width: 15, height: 15)
         let image1String = NSAttributedString(attachment: image1Attachment)
         
@@ -57,7 +64,7 @@ public class DesignHelper {
     
     
     
-    
+//    MARK: -some extra methods
     public func radioButton(_ button: UIButton, checked: Bool, label: String, color: UIColor = .black) {
         let attr = [NSAttributedString.Key.foregroundColor : color]
         
@@ -98,7 +105,7 @@ public class DesignHelper {
     
     
     
-//    MARK: - toast related
+//    MARK: -toast related
     public func toast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
         
         var style = ToastStyle()
@@ -107,7 +114,7 @@ public class DesignHelper {
         view.makeToast(message, duration: duration, position: position, style: style)
     }
     
-    public func completionToast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping completion) {
+    public func completionToast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping Completion) {
         var style = ToastStyle()
         style.messageAlignment = .center
         
@@ -122,7 +129,7 @@ public class DesignHelper {
     
     
     
-//    MARK: - imageviewer related
+//    MARK: -imageviewer related
     public func openImageViewer(_ viewController: UIViewController, urls: [String], presentationStyle: UIModalPresentationStyle) {
         let vc = ImageViewer(nibName: "ImageViewer", bundle: nil)
         vc.imageUrls = urls
@@ -133,9 +140,9 @@ public class DesignHelper {
     
     
     
-//    MARK: - color related
+//    MARK: -color related
     public func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor{
-        var cString:String = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        var cString: String = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         if (cString.hasPrefix("#")) {
             cString.remove(at: cString.startIndex)
@@ -171,18 +178,18 @@ extension String {
 extension UITextField {
     
     public func leftPadding(_ padding: CGFloat) {
-        let vw = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
-        vw.backgroundColor = self.backgroundColor
+        let paddingView = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
+        paddingView.backgroundColor = self.backgroundColor
         
-        self.leftView = vw
+        self.leftView = paddingView
         self.leftViewMode = .always
     }
     
     public func rightPadding(_ padding: CGFloat) {
-        let vw = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
-        vw.backgroundColor = self.backgroundColor
+        let paddingView = UIView(frame: .init(x: 0, y: 0, width: padding, height: self.frame.size.height))
+        paddingView.backgroundColor = self.backgroundColor
         
-        self.rightView = vw
+        self.rightView = paddingView
         self.rightViewMode = .always
     }
     
@@ -191,12 +198,14 @@ extension UITextField {
 extension UIImage {
     
     public func resizeWithPercent(percentage: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: size.width * percentage, height: size.height * percentage)))
+        let frame = CGRect(origin: .zero, size: CGSize(width: size.width * percentage, height: size.height * percentage))
+        let imageView = UIImageView(frame: frame)
         return resize(imageView)
     }
     
     public func resizeWithWidth(width: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
+        let frame = CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height))))
+        let imageView = UIImageView(frame: frame)
         return resize(imageView)
     }
     

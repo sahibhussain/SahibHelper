@@ -21,7 +21,7 @@ public class ImageViewer: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        designHelper.setButtonFontAwesome(btn: closeButton, size: 25, style: .solid, icon: .times)
+        designHelper.setButtonFontAwesome(closeButton, size: 25, style: .solid, icon: .times)
         closeButton.addTarget(self, action: #selector(closeButtonClicked(_:)), for: .touchUpInside)
         
         let cvc = UINib(nibName: "ImageViewerCVC", bundle: nil)
@@ -51,7 +51,7 @@ extension ImageViewer: UICollectionViewDelegate, UICollectionViewDataSource, UIC
             cell.mainImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "loading"), options: .refreshCached, completed: nil)
         }else {
             cell.mainImageView.image = UIImage(named: "incorrect")
-            designHelper.toast(message: "Image Url not is incorrect", position: .center, duration: 2.0, view: self.view)
+            designHelper.toast("Image Url not is incorrect", position: .center, duration: 2.0, view: self.view)
         }
         
         return cell

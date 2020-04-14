@@ -13,7 +13,7 @@ public class Networking {
     
     public static var baseUrl = "http://pcc123.com/API/SMSLiveDemo1/"  // Production URL
     
-    public typealias CompletionHandler = (_ response: [String:Any]?, _ error: Error?) -> Void
+    public typealias CompletionHandler = (_ response: [String: Any]?, _ error: Error?) -> Void
     public var headers: [String: String] = [:]
     
     
@@ -38,7 +38,7 @@ public class Networking {
                 
                 switch response.result {
                 case .success(let value):
-                    comp(value as? [String:Any], nil)
+                    comp(value as? [String: Any], nil)
                 case .failure(let error):
                     comp(nil, error)
                 }
@@ -64,7 +64,7 @@ public class Networking {
             
             switch response.result {
             case .success(let value):
-                comp(value as? [String:Any], nil)
+                comp(value as? [String: Any], nil)
             case .failure(let error):
                 comp(nil, error)
             }
@@ -81,7 +81,7 @@ public class Networking {
         AF.request(urlString).responseJSON { (response) in
             switch response.result {
             case .success(let value):
-                comp(value as? [String:Any], nil)
+                comp(value as? [String: Any], nil)
             case .failure(let error):
                 comp(nil, error)
             }
@@ -97,7 +97,7 @@ public class Networking {
         AF.request(urlString).responseJSON { (response) in
             switch response.result {
             case .success(let value):
-                comp(value as? [String:Any], nil)
+                comp(value as? [String: Any], nil)
             case .failure(let error):
                 comp(nil, error)
             }
@@ -107,7 +107,7 @@ public class Networking {
     
     
 //    MARK: -json related
-    public func jsonToString(_ json: [String:Any]) -> String{
+    public func jsonToString(_ json: [String: Any]) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
             let convertedString = String(data: data1, encoding: .utf8)
@@ -174,7 +174,7 @@ public class Networking {
     
     
 //    MARK: -alert
-    public func alert(_ message:String, viewController: UIViewController) {
+    public func alert(_ message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let act = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(act)

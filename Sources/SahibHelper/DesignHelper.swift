@@ -16,7 +16,11 @@ public class DesignHelper {
     private init () {}
     
 //    MARK: -shadow related
-    public func dropShadow(view: UIView, radius: CGFloat = 6, opacity: Float = 0.16, color: UIColor = .black, offset: CGSize = .init(width: 0, height: 3)) {
+    public func dropShadow(_ view: UIView,
+                           radius: CGFloat = 6,
+                           opacity: Float = 0.16,
+                           color: UIColor = .black,
+                           offset: CGSize = .init(width: 0, height: 3)) {
         view.layer.masksToBounds = false
         view.layer.shadowColor = color.cgColor
         view.layer.shadowOpacity = opacity
@@ -29,7 +33,7 @@ public class DesignHelper {
     
     
 //    MARK: -font awesome related
-    public func setButtonFontAwesome(btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
+    public func setButtonFontAwesome(_ btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: size, style: style)
         btn.setTitle(String.fontAwesomeIcon(name: icon), for: .normal)
     }
@@ -41,7 +45,7 @@ public class DesignHelper {
                                                       size: CGFloat,
                                                       style: FontAwesomeStyle,
                                                       icon: FontAwesome) {
-        let attr = [NSAttributedString.Key.foregroundColor : textColor]
+        let attr = [NSAttributedString.Key.foregroundColor: textColor]
         
         let image1Attachment = NSTextAttachment()
         let image = UIImage.fontAwesomeIcon(name: icon, style: style, textColor: iconColor, size: .init(width: size, height: size))
@@ -55,7 +59,10 @@ public class DesignHelper {
         btn.setAttributedTitle(passAttStr, for: .normal)
     }
     
-    public func createImagefromFontAwesome(size: CGSize, style: FontAwesomeStyle, icon: FontAwesome, color: UIColor) -> UIImage {
+    public func createImagefromFontAwesome(_ size: CGSize,
+                                           style: FontAwesomeStyle,
+                                           icon: FontAwesome,
+                                           color: UIColor) -> UIImage {
         let img = UIImage.fontAwesomeIcon(name: icon, style: style, textColor: color, size: size)
         return img
     }
@@ -66,13 +73,15 @@ public class DesignHelper {
     
 //    MARK: -some extra methods
     public func radioButton(_ button: UIButton, checked: Bool, label: String, color: UIColor = .black) {
-        let attr = [NSAttributedString.Key.foregroundColor : color]
+        let attr = [NSAttributedString.Key.foregroundColor: color]
         
         let image1Attachment = NSTextAttachment()
         if checked {
-            image1Attachment.image = UIImage.fontAwesomeIcon(name: .dotCircle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
+            let image = UIImage.fontAwesomeIcon(name: .dotCircle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
+            image1Attachment.image = image
         }else {
-            image1Attachment.image = UIImage.fontAwesomeIcon(name: .circle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
+            let image = UIImage.fontAwesomeIcon(name: .circle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
+            image1Attachment.image = image
         }
         image1Attachment.bounds = CGRect(x: 0, y: 0, width: 13, height: 13)
         let image1String = NSAttributedString(attachment: image1Attachment)
@@ -106,7 +115,7 @@ public class DesignHelper {
     
     
 //    MARK: -toast related
-    public func toast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
+    public func toast(_ message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
         
         var style = ToastStyle()
         style.messageAlignment = .center
@@ -114,7 +123,11 @@ public class DesignHelper {
         view.makeToast(message, duration: duration, position: position, style: style)
     }
     
-    public func completionToast(message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping Completion) {
+    public func completionToast(_ message: String,
+                                position: ToastPosition,
+                                duration: TimeInterval,
+                                view: UIView,
+                                comp: @escaping Completion) {
         var style = ToastStyle()
         style.messageAlignment = .center
         
@@ -131,24 +144,24 @@ public class DesignHelper {
     
 //    MARK: -imageviewer related
     public func openImageViewer(_ viewController: UIViewController, urls: [String], presentationStyle: UIModalPresentationStyle) {
-        let vc = ImageViewer(nibName: "ImageViewer", bundle: nil)
-        vc.imageUrls = urls
-        vc.modalPresentationStyle = presentationStyle
-        viewController.present(vc, animated: true, completion: nil)
+        let imageVC = ImageViewer(nibName: "ImageViewer", bundle: nil)
+        imageVC.imageUrls = urls
+        imageVC.modalPresentationStyle = presentationStyle
+        viewController.present(imageVC, animated: true, completion: nil)
     }
     
     
     
     
 //    MARK: -color related
-    public func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor{
+    public func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor {
         var cString: String = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
-        if (cString.hasPrefix("#")) {
+        if cString.hasPrefix("#") {
             cString.remove(at: cString.startIndex)
         }
         
-        if ((cString.count) != 6) {
+        if (cString.count) != 6 {
             return UIColor.gray
         }
         

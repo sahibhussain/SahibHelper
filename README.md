@@ -1,31 +1,28 @@
 # SahibHelper
 
-### Features
+## Features
 
-- FontAwesome support
-- view shadow
-- toast show and with completion
-- network helper
-- much more
+-  FontAwesome support
+-  view shadow
+-  toast show and with completion
+-  network helper
+-  much more
 
-### !Important
+## !Important
 
 ** add font awesome ttf file to your project also mark them in your info.plist **
 
-# ReadMe.md
-
 ![](https://img.shields.io/github/v/release/sahibhussain/SahibHelper?style=for-the-badge)
 
-#### Installation
+### Installation
 
     dependencies: [
     .package(url: "https://github.com/sahibhussain/SahibHelper.git", .upToNextMinor(from: "1.3.0"))
     ]
 
-#### Main Classes
-
+### Main Classes
     
     let designHelper = DesignHelper.shared
     let networkHelper = NetworkHelper.shared
     
-###End
+### End

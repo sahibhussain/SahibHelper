@@ -2,15 +2,15 @@
 
 ## Features
 
--  FontAwesome support
--  view shadow
--  toast show and with completion
--  network helper
--  much more
+-   FontAwesome support
+-   view shadow
+-   toast show and with completion
+-   network helper
+-   much more
 
 ## !Important
 
-** add font awesome ttf file to your project also mark them in your info.plist **
+**add font awesome ttf file to your project also mark them in your info.plist**
 
 ![](https://img.shields.io/github/v/release/sahibhussain/SahibHelper?style=for-the-badge)
 

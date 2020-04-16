@@ -21,6 +21,9 @@
     .package(url: "https://github.com/sahibhussain/SahibHelper.git", .upToNextMinor(from: "1.3.0"))
     ]
 
+💡 ** Tip:** use the latest release version written on the badge.
+
+
 ### Main Classes
     
     let designHelper = DesignHelper.shared

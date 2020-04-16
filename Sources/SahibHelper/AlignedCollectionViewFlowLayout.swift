@@ -26,6 +26,7 @@
 //
 
 // MARK: - 🦆 Type definitions
+import UIKit
 
 /// An abstract protocol that defines an alignment.
 protocol Alignment {}

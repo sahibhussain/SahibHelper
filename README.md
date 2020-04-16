@@ -1,6 +1,6 @@
 # SahibHelper
 
-![](https://img.shields.io/github/v/release/sahibhussain/SahibHelper) ![Codacy Badge](https://api.codacy.com/project/badge/Grade/2359c28a91df45949c58e27c2da7b7bf)
+![](https://img.shields.io/github/v/release/sahibhussain/SahibHelper)
 
 
 ## Features

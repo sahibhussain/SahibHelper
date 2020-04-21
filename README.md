@@ -29,6 +29,8 @@
     let designHelper = DesignHelper.shared
     let networkHelper = NetworkHelper.shared
 
+Custom Switch as SahibSwitch which inherits UIView
+
 ## Available Alignment Options
 
 You can use _any_ combination of horizontal and vertical alignment to achieve your desired layout.

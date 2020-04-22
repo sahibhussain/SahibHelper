@@ -188,6 +188,21 @@ extension String {
     
 }
 
+extension UILabel {
+
+    public var requiredHeight: CGFloat {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.attributedText = attributedText
+        label.sizeToFit()
+        return label.frame.height
+    }
+    
+}
+
 extension UITextField {
     
     public func leftPadding(_ padding: CGFloat) {
@@ -204,6 +219,12 @@ extension UITextField {
         
         self.rightView = paddingView
         self.rightViewMode = .always
+    }
+    
+    func setPlaceHolderColor(_ color: UIColor) {
+        let text = self.placeholder
+        self.placeholder = nil
+        self.attributedPlaceholder = NSAttributedString(string: text ?? "", attributes: [NSAttributedString.Key.foregroundColor: color])
     }
     
 }

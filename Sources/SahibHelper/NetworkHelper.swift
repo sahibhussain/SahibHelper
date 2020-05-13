@@ -24,11 +24,7 @@ public class Networking {
     }
     
     
-//    MARK: -networkd related
-    public func sharedBaseUrl(_ urlStr: String) {
-        Networking.baseUrl = urlStr
-    }
-    
+    // MARK: -networkd related
     public func sendPostRequest(_ urlExt: String, param: [String: Any], comp: @escaping CompletionHandler) {
         
         let urlString = Networking.baseUrl + urlExt
@@ -73,7 +69,7 @@ public class Networking {
         
     }
     
-    public func sendGetRequest(urlExt: String, param: String, comp: @escaping CompletionHandler) {
+    public func sendGetRequest(_ urlExt: String, param: String, comp: @escaping CompletionHandler) {
         
         var urlString = Networking.baseUrl + urlExt + "?" + param
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
@@ -89,7 +85,7 @@ public class Networking {
         
     }
     
-    public func sendGetRequest(completeUrl: String, param: String, comp: @escaping CompletionHandler) {
+    public func sendGetRequest(with completeUrl: String, param: String, comp: @escaping CompletionHandler) {
         
         var urlString = completeUrl + "?" + param
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
@@ -106,7 +102,7 @@ public class Networking {
     }
     
     
-//    MARK: -json related
+    // MARK: -json related
     public func jsonToString(_ json: [String: Any]) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -120,72 +116,68 @@ public class Networking {
     }
     
     
-//    MARK: -date related
-    public func changeDateFormat(_ inputString: String, inputFormat: String) -> String {
+    // MARK: -date related
+    public func changeDateFormat(_ inputString: String, inputFormat: String, outputFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
-        let date = dateFormatter.date(from: inputString)!
+        guard let date = dateFormatter.date(from: inputString) else {
+            print("inputDate format is not correct")
+            return ""
+        }
         
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        let dtString = dateFormatter.string(from: date)
-        return dtString
+        dateFormatter.dateFormat = outputFormat
+        return dateFormatter.string(from: date)
     }
     
-    public func changeDateFormatWithTime(_ inputString: String, inputFormat: String) -> String {
-        
+    public func getString(from date: Date,with outputFormat: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = inputFormat
-        let date = dateFormatter.date(from: inputString)!
-        
-        dateFormatter.dateFormat = "MMM dd, yyyy h:mm a"
-        let dtString = dateFormatter.string(from: date)
-        return dtString
-        
+        dateFormatter.dateFormat = outputFormat
+        return dateFormatter.string(from: date)
     }
     
-    public func getLastDateOfMonth(month: String, year: String) -> String {
+    public func getLastDateOfMonth(month: String, year: String) -> Date {
         let monthInt = Int(month)!
         let yearInt = Int(year)!
+        
+        var dateStr = ""
         
         if monthInt <= 7 {
             if monthInt % 2 == 0 {
                 if monthInt == 2 {
                     if yearInt % 4 == 0 {
-                        return "\(month)/29/\(year)"
+                        dateStr = "\(month)/29/\(year)"
                     }else {
-                        return "\(month)/28/\(year)"
+                        dateStr = "\(month)/28/\(year)"
                     }
                 }else {
-                    return "\(month)/30/\(year)"
+                    dateStr = "\(month)/30/\(year)"
                 }
             }else {
-                return "\(month)/31/\(year)"
+                dateStr = "\(month)/31/\(year)"
             }
         }else {
             if monthInt % 2 == 0 {
-                return "\(month)/31/\(year)"
+                dateStr = "\(month)/31/\(year)"
             }else {
-                return "\(month)/30/\(year)"
+                dateStr = "\(month)/30/\(year)"
             }
         }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yyyy"
+        return dateFormatter.date(from: dateStr)!
+        
     }
     
     
     
     
-//    MARK: -alert
+    // MARK: -alert
     public func alert(_ message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let act = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(act)
         viewController.present(alert, animated: true, completion: nil)
-    }
-    
-    
-    
-//    MARK: -regex related
-    public func matches(_ string: String, regex: String) -> Bool {
-        return string.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
     
 }

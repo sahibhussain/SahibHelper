@@ -72,30 +72,6 @@ public class DesignHelper {
     
     
 //    MARK: -some extra methods
-    public func radioButton(_ button: UIButton, checked: Bool, label: String, color: UIColor = .black) {
-        let attr = [NSAttributedString.Key.foregroundColor: color]
-        
-        let image1Attachment = NSTextAttachment()
-        if checked {
-            let image = UIImage.fontAwesomeIcon(name: .dotCircle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
-            image1Attachment.image = image
-        }else {
-            let image = UIImage.fontAwesomeIcon(name: .circle, style: .regular, textColor: color, size: .init(width: 50, height: 50))
-            image1Attachment.image = image
-        }
-        image1Attachment.bounds = CGRect(x: 0, y: 0, width: 13, height: 13)
-        let image1String = NSAttributedString(attachment: image1Attachment)
-        
-        let passAttStr = NSMutableAttributedString(string: "")
-        passAttStr.append(image1String)
-        passAttStr.append(NSAttributedString(string: " \(label)", attributes: attr))
-        button.setAttributedTitle(passAttStr, for: .normal)
-    }
-    
-    public func checkboxButton(_ button: UIButton, checked: Bool, label: String) {
-        
-    }
-    
     public func statusView(viewWidth: CGFloat, color: String) -> UIView {
         let statView = UIView()
         
@@ -123,11 +99,7 @@ public class DesignHelper {
         view.makeToast(message, duration: duration, position: position, style: style)
     }
     
-    public func completionToast(_ message: String,
-                                position: ToastPosition,
-                                duration: TimeInterval,
-                                view: UIView,
-                                comp: @escaping Completion) {
+    public func completionToast(_ message: String, position: ToastPosition, duration: TimeInterval, view: UIView, comp: @escaping Completion) {
         var style = ToastStyle()
         style.messageAlignment = .center
         
@@ -180,10 +152,8 @@ public class DesignHelper {
 
 extension String {
     
-    public static func ~= (lhs: String, rhs: String) -> Bool {
-        guard let regex = try? NSRegularExpression(pattern: rhs) else { return false }
-        let range = NSRange(location: 0, length: lhs.utf16.count)
-        return regex.firstMatch(in: lhs, options: [], range: range) != nil
+    public func matches(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
     
 }

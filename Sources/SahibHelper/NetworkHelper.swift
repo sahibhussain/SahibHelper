@@ -24,7 +24,7 @@ public class Networking {
     }
     
     
-    // MARK: -networkd related
+    // MARK: - networkd related
     public func sendPostRequest(_ urlExt: String, param: [String: Any], comp: @escaping CompletionHandler) {
         
         let urlString = Networking.baseUrl + urlExt
@@ -56,7 +56,7 @@ public class Networking {
                 formData.append(data, withName: key)
             }
             
-        }, to: urlString).responseJSON { (response) in
+        }, to: urlString, headers: HTTPHeaders(headers)).responseJSON { (response) in
             
             switch response.result {
             case .success(let value):
@@ -74,7 +74,7 @@ public class Networking {
         var urlString = Networking.baseUrl + urlExt + "?" + param
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         
-        AF.request(urlString).responseJSON { (response) in
+        AF.request(urlString, method: .get, headers: HTTPHeaders(headers)).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 comp(value as? [String: Any], nil)
@@ -90,7 +90,7 @@ public class Networking {
         var urlString = completeUrl + "?" + param
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         
-        AF.request(urlString).responseJSON { (response) in
+        AF.request(urlString, method: .get, headers: HTTPHeaders(headers)).responseJSON { (response) in
             switch response.result {
             case .success(let value):
                 comp(value as? [String: Any], nil)
@@ -102,7 +102,7 @@ public class Networking {
     }
     
     
-    // MARK: -json related
+    // MARK: - json related
     public func jsonToString(_ json: [String: Any]) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -116,7 +116,7 @@ public class Networking {
     }
     
     
-    // MARK: -date related
+    // MARK: - date related
     public func changeDateFormat(_ inputString: String, inputFormat: String, outputFormat: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = inputFormat
@@ -172,7 +172,7 @@ public class Networking {
     
     
     
-    // MARK: -alert
+    // MARK: - alert
     public func alert(_ message: String, viewController: UIViewController) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let act = UIAlertAction(title: "OK", style: .cancel, handler: nil)

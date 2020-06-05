@@ -15,7 +15,7 @@ public class DesignHelper {
     
     private init () {}
     
-//    MARK: -shadow related
+//    MARK: - shadow related
     public func dropShadow(_ view: UIView,
                            radius: CGFloat = 6,
                            opacity: Float = 0.16,
@@ -32,7 +32,7 @@ public class DesignHelper {
     
     
     
-//    MARK: -font awesome related
+//    MARK: - font awesome related
     public func setButtonFontAwesome(_ btn: UIButton, size: CGFloat, style: FontAwesomeStyle, icon: FontAwesome) {
         btn.titleLabel?.font = UIFont.fontAwesome(ofSize: size, style: style)
         btn.setTitle(String.fontAwesomeIcon(name: icon), for: .normal)
@@ -71,7 +71,7 @@ public class DesignHelper {
     
     
     
-//    MARK: -some extra methods
+//    MARK: - some extra methods
     public func statusView(viewWidth: CGFloat, color: String) -> UIView {
         let statView = UIView()
         
@@ -90,7 +90,7 @@ public class DesignHelper {
     
     
     
-//    MARK: -toast related
+//    MARK: - toast related
     public func toast(_ message: String, position: ToastPosition, duration: TimeInterval, view: UIView) {
         
         var style = ToastStyle()
@@ -114,7 +114,7 @@ public class DesignHelper {
     
     
     
-//    MARK: -imageviewer related
+//    MARK: - imageviewer related
     public func openImageViewer(_ viewController: UIViewController, urls: [String], presentationStyle: UIModalPresentationStyle) {
         let imageVC = ImageViewer(nibName: "ImageViewer", bundle: nil)
         imageVC.imageUrls = urls
@@ -125,7 +125,7 @@ public class DesignHelper {
     
     
     
-//    MARK: -color related
+//    MARK: - color related
     public func hexStringToColor(hexStr: String, alpha: CGFloat) -> UIColor {
         var cString: String = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
